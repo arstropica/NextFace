@@ -147,8 +147,8 @@ class MorphableModel:
         self.uvMap = self.uvParametrization['uvVertices'].to(device)
 
         print("loading landmarks association file...")
-        self.landmarksAssociation = torch.tensor(np.loadtxt(pathLandmarks, delimiter='\t\t')[:, 1].astype(np.int64)).to(device)
-        self.landmarksMask = torch.tensor(np.loadtxt(pathLandmarks, delimiter='\t\t')[:, 0].astype(np.int64)).to(device)
+        self.landmarksAssociation = torch.tensor(np.genfromtxt(pathLandmarks, delimiter='\t\t')[:, 1].astype(np.int64)).to(device)
+        self.landmarksMask = torch.tensor(np.genfromtxt(pathLandmarks, delimiter='\t\t')[:, 0].astype(np.int64)).to(device)
 
         print('creating sampler...')
         self.sampler = NormalSampler(self)
