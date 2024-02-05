@@ -74,7 +74,7 @@ class Image:
         self.width = numpyImage.shape[1]
         self.channels = numpyImage.shape[2]
         self.gamma = 2.2
-        self.center = torch.tensor([ self.width / 2, self.height / 2], dtype = torch.float32, device = self.device).reshape(1, -1)
+        self.center = torch.tensor(np.array([ self.width / 2, self.height / 2]), dtype = torch.float32, device = self.device).reshape(1, -1)
         self.imageName = os.path.basename(path)
 
 class ImageFolder:

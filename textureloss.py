@@ -1,12 +1,13 @@
 import torch
+import numpy as np
 
 class TextureLoss:
 	def __init__(self, device):
 		self.device = device
 
-		self.RGB2XYZ = torch.tensor([[41.2390799265959, 35.7584339383878, 18.0480788401834],
+		self.RGB2XYZ = torch.tensor(np.array([[41.2390799265959, 35.7584339383878, 18.0480788401834],
 									 [21.2639005871510, 71.5168678767756, 07.2192315360734],
-									 [01.9330818715592, 11.9194779794626, 95.0532152249661]], dtype=torch.float).to(self.device)
+									 [01.9330818715592, 11.9194779794626, 95.0532152249661]]), dtype=torch.float).to(self.device)
 
 	def regTextures(self, vTex, refTex, ws=3., wr=10.0, wc=10., wsm=0.01, wm=0.):
 		'''

@@ -10,6 +10,7 @@ import argparse
 import pickle
 import tqdm
 import sys
+import traceback
 
 class Optimizer:
 
@@ -478,7 +479,9 @@ if __name__ == "__main__":
     if config.lamdmarksDetectorType == 'mediapipe':
         try:
             from  landmarksmediapipe import LandmarksDetectorMediapipe
-        except:
+        except Exception:
+            print(f"[EXCEPTION] {Exception}")
+            print(traceback.format_exc())
             print('[WARN] Mediapipe for landmarks detection not availble. falling back to FAN landmarks detector. You may want to try Mediapipe because it is much accurate than FAN (pip install mediapipe)')
             config.lamdmarksDetectorType = 'fan'
 

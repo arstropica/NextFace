@@ -52,7 +52,7 @@ class LandmarksDetectorMediapipe:
 			landmarks.append(land)
 
 		torch.set_grad_enabled(True) #it turns out that the landmark detector disables the autograd engine. this line fixes this
-		return torch.tensor(landmarks, device = self.device)
+		return torch.tensor(np.array(landmarks), device = self.device, dtype = torch.float32)
 
 	def _detect(self, image):
 

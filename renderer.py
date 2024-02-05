@@ -3,6 +3,7 @@ import math
 import pyredner
 import redner
 import random
+import numpy as np
 
 from pyredner import set_print_timing
 
@@ -69,18 +70,18 @@ class Renderer:
         self.bounces = bounces
         self.device = torch.device(device)
         self.clip_near = 10.0
-        self.upVector = torch.tensor([0.0, -1.0, 0.0])
+        self.upVector = torch.tensor(np.array([0.0, -1.0, 0.0]), dtype = torch.float32)
         self.counter = 0
         self.screenWidth = 256
         self.screenHeight = 256
 
     def setupCamera(self, focal, image_width, image_height):
 
-        fov = torch.tensor([360.0 * math.atan(image_width / (2.0 * focal)) / math.pi])  # calculate camera field of view from image size
+        fov = torch.tensor(np.array([360.0 * math.atan(image_width / (2.0 * focal)) / math.pi]), dtype = torch.float32)  # calculate camera field of view from image size
 
         cam = pyredner.Camera(
-            position = torch.tensor([0.0, 0.0, 0.0]),
-            look_at = torch.tensor([0.0, 0.0, 1.0]),
+            position = torch.tensor(np.array([0.0, 0.0, 0.0]), dtype = torch.float32),
+            look_at = torch.tensor(np.array([0.0, 0.0, 1.0]), dtype = torch.float32),
             up = self.upVector,
             fov = fov.cpu(),
             clip_near = self.clip_near,

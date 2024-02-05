@@ -32,7 +32,7 @@ class LandmarksDetectorFAN:
 			landmarks.append(land)
 
 		torch.set_grad_enabled(True) #it turns out that the landmark detector disables the autograd engine. this line fixes this
-		return torch.tensor(landmarks, device = self.device)
+		return torch.tensor(np.array(landmarks), device = self.device, dtype = torch.float32)
 	def _detect(self, image):
 		arr = self.landmarksDetector.get_landmarks_from_image(image, None)
 		if arr is None or len(arr) == 0:
@@ -50,7 +50,7 @@ class LandmarksDetectorFAN:
 			break #only one subject per frame
 
 		return landmarks[0]
-		return torch.tensor(landmarks, device = self.device)
+		return torch.tensor(np.array(landmarks), device = self.device, dtype = torch.float32)
 
 	def drawLandmarks(self, image, landmarks):
 		'''
